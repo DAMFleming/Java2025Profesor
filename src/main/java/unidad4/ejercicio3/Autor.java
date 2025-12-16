@@ -76,9 +76,4 @@ public class Autor {
 //				(email != null ? String.format(" %s", email) : "");
 //	}
 
-	public static void main(String[] args) {
-		Autor pepe = new Autor("Pepe");
-		System.out.println(pepe);
-	}
-
 }
