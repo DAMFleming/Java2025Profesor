@@ -9,18 +9,18 @@ import unidad4.ejercicio3.Autor;
 public class Libro {
 
 	private String titulo;
-	private ArrayList<Autor> autores = new ArrayList<>();
+	private List<Autor> autores;
 	private float precio;
 	private int stock;
 	
-	public Libro(String titulo, ArrayList<Autor> autores, float precio, int stock) {
+	public Libro(String titulo, List<Autor> autores, float precio, int stock) {
 		this.titulo = titulo;
 		this.autores = autores;
 		this.precio = precio;
 		this.stock = stock;
 	}
 
-	public Libro(String titulo, ArrayList<Autor> autores, float precio) {
+	public Libro(String titulo, List<Autor> autores, float precio) {
 		this.titulo = titulo;
 		this.autores = autores;
 		this.precio = precio;
@@ -49,6 +49,10 @@ public class Libro {
 
 	public List<Autor> getAutores() {
 		return Collections.unmodifiableList(autores);
+	}
+	
+	public static void main(String[] args) {
+		Libro libro = new Libro("a", List.of(new Autor("b"), new Autor("c")), 10);
 	}
 	
 }
