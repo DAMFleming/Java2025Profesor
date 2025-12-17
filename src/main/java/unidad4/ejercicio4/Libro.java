@@ -50,8 +50,4 @@ public class Libro {
 		return Collections.unmodifiableList(autores);
 	}
 	
-	public static void main(String[] args) {
-		Libro libro = new Libro("a", List.of(new Autor("b"), new Autor("c")), 10);
-	}
-	
 }
