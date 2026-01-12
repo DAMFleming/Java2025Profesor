@@ -1,0 +1,7 @@
+package unidad4.ejercicio8;
+
+public class Pokemon {
+
+	
+	
+}
