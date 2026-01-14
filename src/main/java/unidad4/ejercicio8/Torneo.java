@@ -2,6 +2,7 @@ package unidad4.ejercicio8;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /*
 Ash Charizard fuego 100
