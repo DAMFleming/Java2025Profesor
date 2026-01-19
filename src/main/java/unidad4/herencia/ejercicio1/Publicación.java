@@ -34,7 +34,7 @@ public abstract class Publicación {
 
 	@Override
 	public String toString() {
-		return String.format("[%d, %s, %d]", código, título, año);
+		return String.format("%d, %s, %d", código, título, año);
 	}
 	
 	
