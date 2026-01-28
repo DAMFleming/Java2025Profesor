@@ -1,4 +1,4 @@
-package unidad4.herencia.ejercicio2;
+package ejemplos.clases.anidadas;
 
 public class Ejemplos {
 
@@ -11,7 +11,7 @@ public class Ejemplos {
 		}
 		@Override
 		public String toString() {
-			return String.valueOf(n) + " " + String.valueOf(x);
+			return String.valueOf(n) /*+ " " + String.valueOf(x)*/;
 		}
 	}
 	
