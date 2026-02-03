@@ -9,32 +9,36 @@ public class Ejercicio5 {
 		int s;
 		while (true) {
 			try {
-				s = Integer.parseInt(IO.readln("Número S de secuencias: "));
+				s = Integer.parseInt(IO.readln("Número de secuencias: "));
 				break;
 			} catch (NumberFormatException e) {
-				IO.println("Incorrecto, introdúcelo de nuevo");
+				IO.println("Dato incorrecto, introdúcelo de nuevo");
 			}
 		}
-		for (int i=0; i<s; i++)
-			procesarSecuencia();
+		for (int i=1; i<=s; i++)
+			procesarSecuencia(i);
 	}
 	
-	static void procesarSecuencia() {
+	static void procesarSecuencia(int i) {
 		int n, k;
+		
+		IO.println(String.format("Leyendo datos de la secuencia %d", i));
 		while (true) {
 			try {
-				String [] valores = IO.readln("Introduce N y K: ").split(" ");
+				String [] valores = IO.readln("Introduce longitud y cantidad de números a borrar: ").split(" ");
 				if (valores.length != 2)
-					throw new NumberFormatException();
+					throw new RuntimeException();
 				n = Integer.parseInt(valores[0]);
 				k = Integer.parseInt(valores[1]);
 				if (k > n)
 					throw new IllegalArgumentException();
 				break;
 			} catch (NumberFormatException e) {
-				IO.println("Incorrecto, introdúcelos de nuevo");
+				IO.println("Datos incorrectos, introdúcelos de nuevo");
 			} catch (IllegalArgumentException e) {
 				IO.println("K no debe de ser mayor que N, introdúcelos de nuevo");
+			} catch (RuntimeException e) {
+				IO.println("Cantidad incorrecta de valores, introdúcelos de nuevo");
 			}
 		}
 		List<Integer> secuencia = leerSecuencia(n);
@@ -48,12 +52,14 @@ public class Ejercicio5 {
 			try {
 				String [] valores = IO.readln("Introduce la secuencia: ").split(" ");
 				if (valores.length != n)
-					throw new NumberFormatException();
+					throw new RuntimeException();
 				for (int i=0; i<valores.length; i++)
 					secuencia.add(Integer.parseInt(valores[i]));
 				break;
 			} catch (NumberFormatException e) {
-				IO.println("Incorrecto, introdúcela de nuevo");
+				IO.println("Datos incorrectos, introdúcela de nuevo");
+			} catch (RuntimeException e) {
+				IO.println("Cantidad incorrecta de valores, introdúcela de nuevo");
 			}
 		}
 		return secuencia;
