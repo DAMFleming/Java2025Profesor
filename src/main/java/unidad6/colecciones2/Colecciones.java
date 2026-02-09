@@ -1,11 +1,18 @@
 package unidad6.colecciones2;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Colecciones {
 	
@@ -34,9 +41,36 @@ public class Colecciones {
 	public static boolean algunaSeRepiteAlMenos3Veces(List<String> l) {
 		Map<String, Integer> m = new HashMap<>();
 		for (String s: l) {
-			
+			if(!(m.putIfAbsent(s, 1) == null)) {
+				m.replace(s, m.get(s)+1);
+			}
 		}
+		Iterator<Integer> iterador = m.values().iterator();
+		while(iterador.hasNext()) {
+			if (iterador.next() >= 3) {
+				return true;
+			}
+		}
+		return false;
 	}
+	
+	public static void negativosAbajoPositivosArriba(Deque<Integer> pila) {
+		Queue<Integer> cola = new ArrayDeque<>();
+		while (!pila.isEmpty())
+			cola.offer(pila.pop());
+		for (int i=0; i<cola.size(); i++)
+			if (cola.peek() < 0)
+				pila.push(cola.poll());
+			else
+				cola.offer(cola.poll());
+		while (!cola.isEmpty())
+			pila.push(cola.poll());
+	}
+	
+	public static Integer moda(List<Integer> lista) {
+		
+	}
+	
 
 	public static void main(String[] args) {
 		Set<String> c1 = new HashSet<>(Set.of("a", "aa", "aaa", "aaaa", "aaaaa"));
@@ -60,6 +94,7 @@ public class Colecciones {
 		
 		// ----------------------------------------------------------------------------------
 		
-		
+		List<Integer> l1 = new ArrayList<>(List.of(2, 7, 1, 7, 3, 9, 1, 5, 4, 1, 3, 2, 1, 7, 3, 7, 9, 7)); 
+		System.out.println(moda(l1));
 	}
 }
