@@ -68,7 +68,13 @@ public class Colecciones {
 	}
 	
 	public static Integer moda(List<Integer> lista) {
-		
+		Entry<Integer, Integer> e = lista.stream()
+				.collect(Collectors.toMap(n -> n, n -> 1, (v1, v2) -> v1 + v2))
+				.entrySet()
+				.stream()
+				.max(Comparator.comparing(Entry::getValue, Integer::compare))
+				.orElse(null);
+		return e == null ? null : e.getKey();
 	}
 	
 
