@@ -3,6 +3,7 @@ package unidad6.colecciones1b;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Ejercicio5 {
 
@@ -16,7 +17,6 @@ public class Ejercicio5 {
 			
 			
 			System.out.println(secuencia);
-			secuencia.clear();
 		}
 	}
 	
@@ -35,21 +35,16 @@ public class Ejercicio5 {
 	
 	static List<Integer> leerVariosNumeros(int n, String mensaje) {
 		String [] valores;
-		List<Integer> lista = new ArrayList<>();
 		while (true)
 			try  {
 				valores = IO.readln(mensaje).trim().split("\\s+");
 				if (valores.length != n)
 					System.out.println("Error, inténtalo de nuevo");
 				else
-					for (String s: valores)
-						lista.add(Integer.parseInt(s));
-				break;
+					return Arrays.stream(valores).map(Integer::parseInt).collect(Collectors.toCollection(ArrayList::new));
 			} catch (NumberFormatException e) {
-				lista.clear();
 				System.out.println("Error, inténtalo de nuevo");
 			}
-		return lista;
 	}
 
 }
