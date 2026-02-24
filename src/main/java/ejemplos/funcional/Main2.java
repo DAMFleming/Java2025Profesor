@@ -27,7 +27,7 @@ public class Main2 {
 		//v = OtraClase::m1;
 		
 		Function<String, Integer> v2 = String::length;
-		v2 = "hola"::length;
+//		v2 = "hola"::length;
 		
 		Function<String, String> v3 = String::new;
 		

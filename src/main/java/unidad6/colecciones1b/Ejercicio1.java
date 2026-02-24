@@ -1,4 +1,4 @@
-package unidad6.colecciones1;
+package unidad6.colecciones1b;
 
 import java.util.LinkedHashSet;
 import java.util.Scanner;
