@@ -3,19 +3,23 @@ package unidad6.colecciones1b;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 public class Ejercicio5 {
 
 	public static void main(String[] args) {
 		int S = leerNumeroDeSecuencias();
+		int N;
+		int K;
 		for (int i=0; i<S; i++) {
-			List<Integer> lista = leerVariosNumeros(2, "Introduce el valor de N y K: ");
-			int N = lista.get(0);
-			int K = lista.get(1);
+			do {
+				List<Integer> lista = leerVariosNumeros(2, "Introduce el valor de N y K: ");
+				if ((N = lista.get(0)) < (K = lista.get(1)))
+						System.out.println("K no puede ser mayor que N");
+			} while (N < K);
 			List<Integer> secuencia = leerVariosNumeros(N, "Números de la secuencia: ");
-			
-			
+			procesarSecuencia(secuencia, K);
 			System.out.println(secuencia);
 		}
 	}
@@ -45,6 +49,44 @@ public class Ejercicio5 {
 			} catch (NumberFormatException e) {
 				System.out.println("Error, inténtalo de nuevo");
 			}
+	}
+	
+//	static void procesarSecuencia(List<Integer> secuencia, int K) {
+//		for (int i=0; i<K; i++) {
+//			ListIterator<Integer> it = secuencia.listIterator();
+//			while (it.hasNext()) {
+//				int n = it.next();
+//				if (it.hasNext()) {
+//					int sgte = it.next();
+//					if (n < sgte) {
+//						it.previous();
+//						it.previous();
+//						it.remove();
+//						break;
+//					}
+//					it.previous();
+//				}
+//				else
+//					it.remove();
+//			}
+//		}
+//	}
+	
+	static void procesarSecuencia(List<Integer> secuencia, int K) {
+		for (int i=0; i<K; i++) {
+			ListIterator<Integer> it = secuencia.listIterator();
+			while (it.hasNext()) {
+				int n = it.next();
+				if (it.hasNext()) {
+					if (n < secuencia.get(it.nextIndex())) {
+						it.remove();
+						break;
+					}
+				}
+				else
+					it.remove();
+			}
+		}
 	}
 
 }
