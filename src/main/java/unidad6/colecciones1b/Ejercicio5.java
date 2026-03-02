@@ -1,7 +1,8 @@
 package unidad6.colecciones1b;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 public class Ejercicio5 {
 
 	public static void main(String[] args) {
+		BufferedReader br = null;
 		int S = leerNumeroDeSecuencias();
 		int N;
 		int K;
@@ -26,7 +28,7 @@ public class Ejercicio5 {
 	
 	static int leerNumeroDeSecuencias() {
 		int n = 0;
-		while (n <= 0)
+		while (n <= 0)  {
 			try {
 				n = Integer.parseInt(IO.readln("Número de secuencias: "));
 				if (n <= 0)
@@ -34,6 +36,8 @@ public class Ejercicio5 {
 			} catch (NumberFormatException e) {
 				System.out.println("Error, inténtalo de nuevo");
 			}
+			
+		}
 		return n;
 	}
 	
@@ -45,7 +49,7 @@ public class Ejercicio5 {
 				if (valores.length != n)
 					System.out.println("Error, inténtalo de nuevo");
 				else
-					return Arrays.stream(valores).map(Integer::parseInt).collect(Collectors.toCollection(ArrayList::new));
+					return Arrays.stream(valores).map(Integer::parseInt).collect(Collectors.toCollection(LinkedList::new));
 			} catch (NumberFormatException e) {
 				System.out.println("Error, inténtalo de nuevo");
 			}
