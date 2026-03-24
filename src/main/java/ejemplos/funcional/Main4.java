@@ -24,8 +24,8 @@ public class Main4<T> {
 	}
 	
 	public static void main(String[] args) {
-		Main4<String> l = Main4.of("a", "bb", "ccc");
-		l.forEach(pepe -> System.out.println(pepe.length()));
+//		Main4<String> l = Main4.of("a", "bb", "ccc");
+//		l.forEach(pepe -> System.out.println(pepe.length()));
 	}
 	
 }
