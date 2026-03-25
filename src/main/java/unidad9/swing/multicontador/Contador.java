@@ -20,6 +20,7 @@ public abstract class Contador extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		textFieldValor.setEditable(false);
 		textFieldValor.setBackground(Color.WHITE);
+		buttonReset.addActionListener(e -> reset());
 		add(buttonReset);
 		add(textFieldValor);
 		setBorder(BorderFactory.createCompoundBorder(
@@ -32,7 +33,6 @@ public abstract class Contador extends JPanel {
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createEmptyBorder(0, 5, 0, 5),
 						textFieldValor.getBorder()));
-		
 	}
 	
 	public void reset() {
@@ -42,6 +42,11 @@ public abstract class Contador extends JPanel {
 	
 	public void inc() {
 		valor++;
+		textFieldValor.setText(String.valueOf(valor));
+	}
+	
+	public void dec(int n) {
+		valor -= n;
 		textFieldValor.setText(String.valueOf(valor));
 	}
 	

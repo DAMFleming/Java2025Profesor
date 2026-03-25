@@ -9,9 +9,6 @@ public class ContadorGlobal extends Contador {
 	
 	private List<ContadorParcial> parciales = new ArrayList<>();
 	
-	public ContadorGlobal() {
-		
-	}
 	
 	public void addContadorParcial(ContadorParcial c) {
 		parciales.add(c);
@@ -19,7 +16,6 @@ public class ContadorGlobal extends Contador {
 	
 	@Override
 	public void reset() {
-		super.reset();
 		parciales.forEach(Contador::reset);
 	}
 	
