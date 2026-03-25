@@ -13,6 +13,8 @@ public class Main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
+	private String [] nombres = {"Luna Nueva", "Luna Creciente", "Cuarto Creciente", 
+			"Quinto Octante", "Luna Llena", "Tercer Octante", "Cuarto Menguante", "Luna Menguante"};
 	private List<Luna> lunas = new LinkedList<>();
 	private JLabel luna;
 	
@@ -29,11 +31,11 @@ public class Main extends JFrame {
 	}
 	
 	private void cargarLunas() {
-		Luna luna;
-		ImageIcon imgLuna;
-		imgLuna = new ImageIcon(Main.class.getResource("/luna/Luna Nueva.png"));
-		luna = new Luna("Luna Nueva", imgLuna);
-		lunas.add(luna);
+		for (String nombre: nombres)
+			lunas.add(new Luna(
+					nombre,
+					new ImageIcon(Main.class.getResource("/luna/" + nombre + ".png"))
+			));
 	}
 	
 	public static void main(String[] args) {
