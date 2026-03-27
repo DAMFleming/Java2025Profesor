@@ -23,6 +23,12 @@ public class ContadorParcial extends Contador{
 	}
 	
 	@Override
+	public void dec(int n) {
+		cg.dec(n);
+		super.dec(n);
+	}
+	
+	@Override
 	public void reset() {
 		cg.dec(getValor());
 		super.reset();
