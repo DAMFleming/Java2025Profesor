@@ -2,11 +2,14 @@ package unidad9.swing.luna;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 
 public class Visor extends JLabel {
 
@@ -16,6 +19,7 @@ public class Visor extends JLabel {
 			"Quinto Octante", "Luna Llena", "Tercer Octante", "Cuarto Menguante", "Luna Menguante"};
 	private static final List<Luna> lunas = new ArrayList<>();
 	private static int lunaActual = 0;
+	private Main vp;
 	
 	static {
 		for (String nombre: nombres)
@@ -25,8 +29,10 @@ public class Visor extends JLabel {
 			));
 	}
 	
-	public Visor() {
+	public Visor(Main vp) {
 		super(lunas.get(lunaActual).getNombre(), lunas.get(lunaActual).getImagen(), JLabel.CENTER);
+		this.vp = vp;
+		addMouseListener(new MouseListener());
 		setVerticalTextPosition(BOTTOM);
 		setHorizontalTextPosition(CENTER);
 		setForeground(Color.WHITE);
@@ -59,6 +65,24 @@ public class Visor extends JLabel {
 		public ImageIcon getImagen() {
 			return imagen;
 		}
+	}
+	
+	private class MouseListener extends MouseAdapter {
+		
+		Timer t = new Timer(1000, Visor.this::siguiente);
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if (t.isRunning()) {
+				t.stop();
+				vp.getSelector().habilitar(true);
+			}
+			else {
+				vp.getSelector().habilitar(false);
+				t.start();
+			}
+		}
+		
 	}
 	
 }

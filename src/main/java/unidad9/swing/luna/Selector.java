@@ -10,18 +10,25 @@ import javax.swing.JPanel;
 public class Selector extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
-	public Selector(Visor visor) {
+	private JButton anterior;
+	private JButton siguiente;
+	
+	public Selector(Main vp) {
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createEmptyBorder(30, 0, 0, 0),
 				getBorder()
 				));
-		JButton anterior = new JButton(new ImageIcon(Selector.class.getResource("/luna/anterior.png")));
-		anterior.addActionListener(visor::anterior);
-		JButton siguiente = new JButton(new ImageIcon(Selector.class.getResource("/luna/siguiente.png")));
-		siguiente.addActionListener(visor::siguiente);
+		anterior = new JButton(new ImageIcon(Selector.class.getResource("/luna/anterior.png")));
+		anterior.addActionListener(vp.getVisor()::anterior);
+		siguiente = new JButton(new ImageIcon(Selector.class.getResource("/luna/siguiente.png")));
+		siguiente.addActionListener(vp.getVisor()::siguiente);
 		add(anterior);
 		add(siguiente);
+	}
+	
+	public void habilitar(boolean enabled) {
+		anterior.setEnabled(enabled);
+		siguiente.setEnabled(enabled);
 	}
 }
