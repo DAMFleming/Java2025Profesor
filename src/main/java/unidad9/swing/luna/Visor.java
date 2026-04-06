@@ -32,7 +32,7 @@ public class Visor extends JLabel {
 	public Visor(Main vp) {
 		super(lunas.get(lunaActual).getNombre(), lunas.get(lunaActual).getImagen(), JLabel.CENTER);
 		this.vp = vp;
-		addMouseListener(new MouseListener());
+		addMouseListener(new VisorMouseListener());
 		setVerticalTextPosition(BOTTOM);
 		setHorizontalTextPosition(CENTER);
 		setForeground(Color.WHITE);
@@ -67,7 +67,7 @@ public class Visor extends JLabel {
 		}
 	}
 	
-	private class MouseListener extends MouseAdapter {
+	private class VisorMouseListener extends MouseAdapter {
 		
 		Timer t = new Timer(1000, Visor.this::siguiente);
 		
