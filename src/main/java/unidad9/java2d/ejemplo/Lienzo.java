@@ -1,45 +1,54 @@
 package unidad9.java2d.ejemplo;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Lienzo extends JPanel {
 
-	public static final BufferedImage imagen;
+	private static final ArrayList<BufferedImage> fotogramas = new ArrayList<>();
+	private int índiceFotograma = 0;
+	private final Timer t = new Timer(100, Lienzo.this::actualizarFotograma);
 	
 	static {
 		try {
-			imagen = ImageIO.read(Lienzo.class.getResource("/capitales/img/mapamundi.png"));
+			for(int i = 1; i < 11; i++) {
+				fotogramas.add(ImageIO.read(Lienzo.class.getResource("/sprites/RUN" + i +".png")));
+			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	private void actualizarFotograma(ActionEvent e) {
+		índiceFotograma++;
+		if (índiceFotograma == fotogramas.size()) {
+			índiceFotograma = 0;
+		}
+		repaint();
 	}
 	
 	public Lienzo(int ancho, int alto) {
 		setPreferredSize(new Dimension(ancho, alto));
 	}
 	
+	public void iniciar() {
+		t.start();
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHint(
-				RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.drawImage(imagen, 0, 0, this);
-		g2d.setColor(Color.BLACK);
-		g2d.rotate(Math.PI / 4, 250, 200);
-		g2d.scale(1.5, 1.5);
-		g2d.drawOval(100, 100, 300, 200);
-		g2d.drawString("Hola Mundo", 100, 100);
-		
+		super.paintComponent(g2d);
+		g2d.drawImage(fotogramas.get(índiceFotograma), 0, 0, this);
 	}
 	
 }
