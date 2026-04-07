@@ -14,6 +14,7 @@ public class Main {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		lienzo.iniciar();
+		lienzo.requestFocus();
 	}
 
 	public static void main(String[] args) {
