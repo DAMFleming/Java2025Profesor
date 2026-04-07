@@ -14,6 +14,7 @@ import javax.swing.Timer;
 
 public class Lienzo extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private static final ArrayList<BufferedImage> fotogramas = new ArrayList<>();
 	private int índiceFotograma = 0;
 	private final Timer t = new Timer(100, Lienzo.this::actualizarFotograma);
