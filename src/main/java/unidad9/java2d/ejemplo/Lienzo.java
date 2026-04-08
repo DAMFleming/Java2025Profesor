@@ -37,14 +37,15 @@ public class Lienzo extends JPanel {
 		/*
 		 * REDIMENSIONAR
 		 */
-		af = AffineTransform.getScaleInstance(.5, .5);
+		double fe = (900d * 1.8d / 10) / original.getHeight();
+		af = AffineTransform.getScaleInstance(fe, fe);
 		op = new AffineTransformOp(af, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		reducida = op.filter(original, null);
 		
 		/*
 		 * REDIMENSIONAR Y VOLTEAR HORIZONTALMENTE
 		 */
-		af = AffineTransform.getScaleInstance(-.5, .5);
+		af = AffineTransform.getScaleInstance(-fe, fe);
 		af.translate(-original.getWidth(null), 0);
 		op = new AffineTransformOp(af, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		volteadaReducida = op.filter(original, null);
