@@ -1,4 +1,4 @@
-package unidad9.java2d.knight;
+package unidad9.java2d.knight.ejercicio1;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import unidad9.java2d.knight.Estado;
 
 public class Lienzo extends JPanel {
 

@@ -1,4 +1,4 @@
-package unidad9.java2d.knight;
+package unidad9.java2d.knight.ejercicio1;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;

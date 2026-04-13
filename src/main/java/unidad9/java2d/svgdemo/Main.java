@@ -1,4 +1,4 @@
-package fp.dam.java.java2d.svgdemo;
+package unidad9.java2d.svgdemo;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;

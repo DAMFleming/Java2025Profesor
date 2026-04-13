@@ -1,4 +1,4 @@
-package fp.dam.java.java2d.svgdemo;
+package unidad9.java2d.svgdemo;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
