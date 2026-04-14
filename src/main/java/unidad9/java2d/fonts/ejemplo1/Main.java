@@ -9,7 +9,10 @@ public class Main extends JFrame {
 
 
 	public Main() {
-		
+		super("Ejemplo de manejo de tipografías");
+		setContentPane(new Lienzo(1000, 700));
+		pack();
+		setLocationRelativeTo(null);
 	}
 	
 	
