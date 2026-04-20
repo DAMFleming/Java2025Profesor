@@ -8,22 +8,22 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 import java.util.List;
-
-import unidad9.java2d.guiada.Ball;
 
 public class Surface extends Canvas {
 	
 	private static final long serialVersionUID = 1L;
 	private Thread t;
 	private boolean paused;
-	private List<Figura> figuras;
+	private List<Figura> figuras = new ArrayList<>();
+	private double anguloGiro = -Math.PI / 4;
 	
 	public Surface(int w, int h) {
 		setIgnoreRepaint(true);
 		setPreferredSize(new Dimension(w, h));
 		setBackground(Color.BLACK);
-		
+		figuras.add(Figura.getPoligono(100, 100, 50, 5, Color.WHITE));
 	}
 
 	private void run() {
@@ -100,6 +100,7 @@ public class Surface extends Canvas {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setColor(getBackground());
 		g2d.fillRect(0, 0, getWidth(), getHeight());
+		g2d.rotate(anguloGiro, getWidth() / 2, getHeight() / 2);
 		figuras.forEach(f -> f.paint(g2d));
 	}
 }
