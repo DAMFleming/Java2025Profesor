@@ -31,6 +31,10 @@ public class Figura {
 		}
 		return new Figura(p, color, x, y);
 	}
+	
+	public void girar(long lapso) {
+		
+	}
 
 	public void paint(Graphics2D g) {
 		AffineTransform af = g.getTransform();

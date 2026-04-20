@@ -76,7 +76,8 @@ public class Surface extends Canvas {
 	}
 
 	private void next(long lapse) {
-		
+		// actualizar angulo de giro del conjunto
+		// actualizar angulo de giro de cada figura
 	}
 
 	private void drawFrame() {
