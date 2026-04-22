@@ -38,8 +38,10 @@ public class Figura {
 
 	public void paint(Graphics2D g) {
 		AffineTransform af = g.getTransform();
-		g.setColor(color);
 		g.rotate(anguloGiro, x, y);
+		g.setColor(Color.GREEN);
+		g.fill(shape);
+		g.setColor(color);
 		g.draw(shape);
 		g.setTransform(af);
 	}

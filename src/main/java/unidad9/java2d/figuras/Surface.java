@@ -23,7 +23,7 @@ public class Surface extends Canvas {
 		setIgnoreRepaint(true);
 		setPreferredSize(new Dimension(w, h));
 		setBackground(Color.BLACK);
-		figuras.add(Figura.getPoligono(100, 100, 50, 5, Color.WHITE));
+		figuras.add(Figura.getPoligono(100, 100, 50, 5, Color.RED));
 	}
 
 	private void run() {
