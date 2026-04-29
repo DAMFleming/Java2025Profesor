@@ -1,4 +1,4 @@
-package ejemplos;
+package ejemplos.io;
 
 import java.nio.file.Path;
 import java.util.Iterator;

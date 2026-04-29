@@ -1,4 +1,4 @@
-package ejemplos;
+package ejemplos.io;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;

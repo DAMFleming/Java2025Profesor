@@ -1,0 +1,7 @@
+EditPad Lite contiene uno de las mejores y más extensas capacidades de buscar-y-sustituir de cualquier editor de textos.
+Encuentra rápidamente la parte del archivo que usted desea editar.
+Resalta las coincidencias, dobla líneas, y salta si se desea por encima de las coincidencias y archivos.
+Instantáneamente realiza cualquier reemplazo sobre una selección (rectangular), archivo, proyecto, o todos los archivos del proyecto.
+Use expresiones regulares y las opciones adaptativas de mayúsculas/minúsculas para una potente y dinámica búsqueda de terminos
+y sustitucionas.
+El uso de la rápida búsqueda-y-reemplazo de EditPad Lite puede automatizar enormemente mucho de su tedioso trabajo de edición.
