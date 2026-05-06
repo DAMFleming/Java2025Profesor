@@ -55,7 +55,7 @@ public class BarraDeHerramientas extends JToolBar {
 	}
 	
 	private void limpiar(ActionEvent e) {
-		
+		pd.limpiar();
 	}
 	
 	private void cerrar(ActionEvent e) {

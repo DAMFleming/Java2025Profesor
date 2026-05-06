@@ -68,4 +68,12 @@ public class PanelDatos extends JPanel {
 		hijos.setEnabled(habilitado);
 	}
 	
+	public void limpiar() {
+		nif.setText("");
+		nombre.setText("");
+		fecha.setText("");
+		salario.setText("");
+		hijos.setText("");
+	}
+	
 }
