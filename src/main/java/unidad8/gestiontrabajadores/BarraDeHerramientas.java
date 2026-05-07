@@ -3,10 +3,12 @@ package unidad8.gestiontrabajadores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -39,7 +41,7 @@ public class BarraDeHerramientas extends JToolBar {
 		return b;
 	}
 	
-	private void abrir(ActionEvent e) {
+	private void abrir(ActionEvent evt) {
 		int returnVal = fc.showOpenDialog(this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			file = fc.getSelectedFile();
@@ -50,8 +52,15 @@ public class BarraDeHerramientas extends JToolBar {
 		}
 	}
 	
-	private void guardar(ActionEvent e) {
-		
+	private void guardar(ActionEvent evt) {
+		try {
+			pd.guardar(file);
+			pd.limpiar();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(this, "Error: " + e.getLocalizedMessage(), "Guardando datos", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Error: " + e.getLocalizedMessage(), "Guardando datos", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	private void limpiar(ActionEvent e) {
@@ -59,6 +68,9 @@ public class BarraDeHerramientas extends JToolBar {
 	}
 	
 	private void cerrar(ActionEvent e) {
-		
+		pd.habilitar(false);
+		guardar.setEnabled(false);
+		cerrar.setEnabled(false);
+		limpiar.setEnabled(false);
 	}
 }

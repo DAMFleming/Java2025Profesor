@@ -2,6 +2,14 @@ package unidad8.gestiontrabajadores;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -66,6 +74,7 @@ public class PanelDatos extends JPanel {
 		fecha.setEnabled(habilitado);
 		salario.setEnabled(habilitado);
 		hijos.setEnabled(habilitado);
+		nif.requestFocus();
 	}
 	
 	public void limpiar() {
@@ -74,6 +83,60 @@ public class PanelDatos extends JPanel {
 		fecha.setText("");
 		salario.setText("");
 		hijos.setText("");
+		nif.requestFocus();
+	}
+	
+	public void guardar(File f) throws FileNotFoundException, IOException, Exception {
+		try (DataOutputStream out = new DataOutputStream(new FileOutputStream(f, true))) {
+			int nif = validarNIF();
+			validarFecha();
+			float salario = validarSalario();
+			int hijos = validarHijos();
+			out.writeInt(nif);
+			out.writeUTF(nombre.getText());
+			out.writeUTF(fecha.getText());
+			out.writeFloat(salario);
+			out.write(hijos);
+		}
+	}
+	
+	private char letraNIF(int nif) {
+		return "TRWAGMYFPDXBNJZSQVHLCKE".charAt(nif % 23);
+	}
+	
+	private int validarNIF() throws Exception {
+		String txtNIF = nif.getText();
+		if (txtNIF.length() < 2)
+			throw new Exception("el nif introducido no es válido");
+		int i = txtNIF.length() - 1;
+		int numero = Integer.parseInt(txtNIF.substring(0,  i));
+		if (txtNIF.toUpperCase().charAt(i) != letraNIF(numero))
+			throw new Exception("el nif introducido no es válido");
+		return numero;
+	}
+	
+	private void validarFecha() throws Exception {
+		try {
+			DateTimeFormatter.ofPattern("dd/MM/yyyy").withResolverStyle(ResolverStyle.STRICT).parse(fecha.getText());
+		} catch (DateTimeParseException e) {
+			throw new Exception("el salario introducido no es válido"); 
+		}
+	}
+	
+	private float validarSalario() throws Exception {
+		try {
+			return Float.parseFloat(this.salario.getText());
+		} catch (NumberFormatException e) {
+			throw new Exception("la fecha introducida no es válida");
+		}
+	}
+	
+	private int validarHijos() throws Exception {
+		try {
+			return Integer.parseInt(this.hijos.getText());
+		} catch (NumberFormatException e) {
+			throw new Exception("el número de hijos introducido no es válido");
+		}
 	}
 	
 }
