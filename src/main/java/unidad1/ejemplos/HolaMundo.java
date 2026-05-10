@@ -1,4 +1,4 @@
-package ejemplos;
+package unidad1.ejemplos;
 
 public class HolaMundo {
 
