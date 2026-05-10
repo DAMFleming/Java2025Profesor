@@ -1,4 +1,4 @@
-package unidad8;
+package unidad8.ejemplos;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
