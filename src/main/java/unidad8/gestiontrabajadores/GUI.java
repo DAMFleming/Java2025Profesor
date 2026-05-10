@@ -1,4 +1,4 @@
-package unidad8.gestiontrabajadores.mdi;
+package unidad8.gestiontrabajadores;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;

@@ -1,4 +1,4 @@
-package unidad8.gestiontrabajadores.mdi;
+package unidad8.gestiontrabajadores;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyVetoException;
 import java.io.File;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.DefaultDesktopManager;
 import javax.swing.JDesktopPane;
@@ -20,6 +22,8 @@ import javax.swing.SwingUtilities;
 public class Main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
+	private ExecutorService executorService = Executors.newFixedThreadPool(10);
 	
 	private JMenuBar menuBar;
 	private FormularioMDI activo;
@@ -137,12 +141,18 @@ public class Main extends JFrame {
 	
 	private void cerrar(ActionEvent e) {
 		formAltas.setEnabled(false);
+		formAltas.limipiar();
 		formConsultas.setEnabled(false);
+		formConsultas.limipiar();
 		menuBar.getMenu(0).getMenuComponent(1).setEnabled(false);
 	}
 	
 	public File getFile() {
 		return file;
+	}
+	
+	public ExecutorService getExecutorService() {
+		return executorService;
 	}
 	
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package unidad8.gestiontrabajadores.mdi;
+package unidad8.gestiontrabajadores;
 
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 
 public class PanelAltas extends Panel {
@@ -58,25 +59,33 @@ public class PanelAltas extends Panel {
 	}
 	
 	public void guardarActionPerformed(ActionEvent evt) {
-		try {
-			int numero = NIF.validar(nif.getText());
-			validarFecha();
-			float salario = validarSalario();
-			int hijos = validarHijos();
-			try (DataOutputStream out = new DataOutputStream(new FileOutputStream(main.getFile(), true))) {
-				out.writeInt(numero);
-				out.writeUTF(nombre.getText());
-				out.writeUTF(fecha.getText());
-				out.writeFloat(salario);
-				out.write(hijos);
-				limpiar();
-				nif.requestFocus();
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error guardando datos", JOptionPane.ERROR_MESSAGE);
+		main.getExecutorService().submit(()-> {
+			SwingUtilities.invokeLater(() -> setEnabled(false));
+			try {
+				int numero = NIF.validar(nif.getText());
+				validarFecha();
+				float salario = validarSalario();
+				int hijos = validarHijos();
+				try (DataOutputStream out = new DataOutputStream(new FileOutputStream(main.getFile(), true))) {
+					out.writeInt(numero);
+					out.writeUTF(nombre.getText());
+					out.writeUTF(fecha.getText());
+					out.writeFloat(salario);
+					out.write(hijos);
+					Thread.sleep(5000);
+					limpiar();
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error guardando datos", JOptionPane.ERROR_MESSAGE);
+				}
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+			} finally {
+				SwingUtilities.invokeLater( () -> {
+					setEnabled(true);
+					nif.requestFocus();
+				});
 			}
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
-		}
+		});
 	}
 	
 	private void limpiarActionPerformed(ActionEvent e) {
@@ -108,7 +117,8 @@ public class PanelAltas extends Panel {
 		}
 	}
 	
-	private void limpiar() {
+	@Override
+	public void limpiar() {
 		nif.setText("");
 		nombre.setText("");
 		fecha.setText("");
@@ -125,8 +135,6 @@ public class PanelAltas extends Panel {
 		hijos.setEnabled(enabled);
 		guardar.setEnabled(enabled);
 		limpiar.setEnabled(enabled);
-		if (!enabled)
-			limpiar();
 	}
 	
 	@Override

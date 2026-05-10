@@ -1,4 +1,4 @@
-package unidad8.gestiontrabajadores.mdi;
+package unidad8.gestiontrabajadores;
 
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -58,8 +58,8 @@ public class PanelConsultas extends Panel {
 		toolBar.add(limpiar = GUI.crearBoton("/gestiontrabajadores/limpiar.png", this::limpiarActionPerformed, false));
 		toolBar.add(datoBusqueda = new JTextField(20));
 		datoBusqueda.setEnabled(false);
-		toolBar.add(buscarNIF = GUI.crearBoton("/gestiontrabajadores/buscar.png", this::buscarNIFActionPerformed, false));
-		toolBar.add(buscarNombre = GUI.crearBoton("/gestiontrabajadores/buscar.png", this::buscarNombreActionPerformed, false));
+		toolBar.add(buscarNIF = GUI.crearBoton("/gestiontrabajadores/buscarnif.png", this::buscarNIFActionPerformed, false));
+		toolBar.add(buscarNombre = GUI.crearBoton("/gestiontrabajadores/buscarnombre.png", this::buscarNombreActionPerformed, false));
 	}
 	
 	private void buscarNIFActionPerformed(ActionEvent evt) {
@@ -91,7 +91,7 @@ public class PanelConsultas extends Panel {
 			this.salario.setText(String.valueOf(salario));
 			this.hijos.setText(String.valueOf(hijos));
 		} catch (EOFException e) {
-			JOptionPane.showMessageDialog(this, "Empleado no encontrado.", "Búsqueda", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "No encontrado.", "Búsqueda de empleado", JOptionPane.INFORMATION_MESSAGE);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Error: " + e.getLocalizedMessage(), "Leyendo datos", JOptionPane.ERROR_MESSAGE);
 		}
@@ -103,7 +103,8 @@ public class PanelConsultas extends Panel {
 		datoBusqueda.requestFocus();
 	}
 	
-	private void limpiar() {
+	@Override
+	public void limpiar() {
 		nif.setText("");
 		nombre.setText("");
 		fecha.setText("");

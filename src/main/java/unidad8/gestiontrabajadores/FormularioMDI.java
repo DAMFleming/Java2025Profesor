@@ -1,4 +1,4 @@
-package unidad8.gestiontrabajadores.mdi;
+package unidad8.gestiontrabajadores;
 
 import java.awt.BorderLayout;
 import java.beans.PropertyVetoException;
@@ -13,7 +13,6 @@ public class FormularioMDI extends JInternalFrame {
 	public FormularioMDI(String titulo, Panel panel) throws PropertyVetoException {
 		super(titulo, false, false, true, false);
 		this.panel = panel;
-		addInternalFrameListener(panel);
 		add(panel, BorderLayout.CENTER);
 		add(panel.getToolBar(), BorderLayout.SOUTH);
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
@@ -25,6 +24,10 @@ public class FormularioMDI extends JInternalFrame {
 	
 	public void setEnabled(boolean enabled) {
 		panel.setEnabled(enabled);
+	}
+	
+	public void limipiar() {
+		panel.limpiar();
 	}
 	
 	@Override
