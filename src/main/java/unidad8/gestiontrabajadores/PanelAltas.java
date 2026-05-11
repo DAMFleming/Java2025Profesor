@@ -72,8 +72,7 @@ public class PanelAltas extends Panel {
 					out.writeUTF(fecha.getText());
 					out.writeFloat(salario);
 					out.write(hijos);
-					Thread.sleep(5000);
-					limpiar();
+					SwingUtilities.invokeLater(this::limpiar);
 				} catch (IOException e) {
 					JOptionPane.showMessageDialog(this, e.getLocalizedMessage(), "Error guardando datos", JOptionPane.ERROR_MESSAGE);
 				}

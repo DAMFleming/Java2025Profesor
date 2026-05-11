@@ -12,18 +12,24 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 
 public class PanelConsultas extends Panel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField nif;
-	private JTextField nombre;
-	private JTextField fecha;
-	private JTextField salario;
-	private JTextField hijos;
-	private JTextField datoBusqueda;
+	private JTextField nifTextField;
+	private String nif;
+	private JTextField nombreTextField;
+	private String nombre;
+	private JTextField fechaTextField;
+	private String fecha;
+	private JTextField salarioTextField;
+	private float salario;
+	private JTextField hijosTextField;
+	private int hijos;
+	private JTextField busquedaTextField;
 	
 	private JToolBar toolBar;
 	private JButton buscarNIF;
@@ -41,23 +47,23 @@ public class PanelConsultas extends Panel {
 						BorderFactory.createEmptyBorder(10, 10, 10, 10)
 		)));
 		GUI.etiqueta(this, 0, 0, "NIF");
-		nif = GUI.texto(this, 0, 1, true, false);
+		nifTextField = GUI.texto(this, 0, 1, true, false);
 		GUI.etiqueta(this, 1, 0, "Nombre");
-		nombre = GUI.texto(this, 1, 1, true, false);
+		nombreTextField = GUI.texto(this, 1, 1, true, false);
 		GUI.etiqueta(this, 2, 0, "Fecha de alta");
-		fecha = GUI.texto(this, 2, 1, true, false);
+		fechaTextField = GUI.texto(this, 2, 1, true, false);
 		GUI.etiqueta(this, 3, 0, "Salario");
-		salario = GUI.texto(this, 3, 1, true, false);
+		salarioTextField = GUI.texto(this, 3, 1, true, false);
 		GUI.etiqueta(this, 4, 0, "Número de hijos");
-		hijos = GUI.texto(this, 4, 1, true, false);
+		hijosTextField = GUI.texto(this, 4, 1, true, false);
 		crearToolBar();
 	}
 	
 	private void crearToolBar() {
 		toolBar = new JToolBar();
 		toolBar.add(limpiar = GUI.crearBoton("/gestiontrabajadores/limpiar.png", this::limpiarActionPerformed, false));
-		toolBar.add(datoBusqueda = new JTextField(20));
-		datoBusqueda.setEnabled(false);
+		toolBar.add(busquedaTextField = new JTextField(20));
+		busquedaTextField.setEnabled(false);
 		toolBar.add(buscarNIF = GUI.crearBoton("/gestiontrabajadores/buscarnif.png", this::buscarNIFActionPerformed, false));
 		toolBar.add(buscarNombre = GUI.crearBoton("/gestiontrabajadores/buscarnombre.png", this::buscarNombreActionPerformed, false));
 	}
@@ -71,51 +77,52 @@ public class PanelConsultas extends Panel {
 	}
 	
 	private void buscar(int criterio) {
-		try (DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(main.getFile())))) {
-			boolean encontrado = false;
-			String nif, nombre, fecha;
-			float salario;
-			int hijos;
-			do {
-				int aux = in.readInt();
-				nif = String.valueOf(aux) + NIF.letra(aux);
-				nombre = in.readUTF();
-				fecha = in.readUTF();
-				salario = in.readFloat();
-				hijos = in.readUnsignedByte();
-				encontrado = datoBusqueda.getText().equalsIgnoreCase(criterio == 0 ? nif : nombre);
-			} while (!encontrado);
-			this.nif.setText(nif);
-			this.nombre.setText(nombre);
-			this.fecha.setText(fecha);
-			this.salario.setText(String.valueOf(salario));
-			this.hijos.setText(String.valueOf(hijos));
-		} catch (EOFException e) {
-			JOptionPane.showMessageDialog(this, "No encontrado.", "Búsqueda de empleado", JOptionPane.INFORMATION_MESSAGE);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Error: " + e.getLocalizedMessage(), "Leyendo datos", JOptionPane.ERROR_MESSAGE);
-		}
+		main.getExecutorService().submit(()-> {
+			try (DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(main.getFile())))) {
+				boolean encontrado = false;
+				do {
+					int aux = in.readInt();
+					nif = String.valueOf(aux) + NIF.letra(aux);
+					nombre = in.readUTF();
+					fecha = in.readUTF();
+					salario = in.readFloat();
+					hijos = in.readUnsignedByte();
+					encontrado = busquedaTextField.getText().equalsIgnoreCase(criterio == 0 ? nif : nombre);
+				} while (!encontrado);
+				SwingUtilities.invokeLater(() -> {
+					nifTextField.setText(nif);
+					nombreTextField.setText(nombre);
+					fechaTextField.setText(fecha);
+					salarioTextField.setText(String.valueOf(salario));
+					hijosTextField.setText(String.valueOf(hijos));
+				});
+			} catch (EOFException e) {
+				JOptionPane.showMessageDialog(this, "No encontrado.", "Búsqueda de empleado", JOptionPane.INFORMATION_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(this, "Error: " + e.getLocalizedMessage(), "Leyendo datos", JOptionPane.ERROR_MESSAGE);
+			}
+		});
 	}
 	
 	
 	private void limpiarActionPerformed(ActionEvent e) {
 		limpiar();
-		datoBusqueda.requestFocus();
+		busquedaTextField.requestFocus();
 	}
 	
 	@Override
 	public void limpiar() {
-		nif.setText("");
-		nombre.setText("");
-		fecha.setText("");
-		salario.setText("");
-		hijos.setText("");
+		nifTextField.setText("");
+		nombreTextField.setText("");
+		fechaTextField.setText("");
+		salarioTextField.setText("");
+		hijosTextField.setText("");
 	}
 	
 	@Override
 	public void setEnabled(boolean enabled) {
 		limpiar.setEnabled(enabled);
-		datoBusqueda.setEnabled(enabled);
+		busquedaTextField.setEnabled(enabled);
 		buscarNIF.setEnabled(enabled);
 		buscarNombre.setEnabled(enabled);
 		if (!enabled)
@@ -124,7 +131,7 @@ public class PanelConsultas extends Panel {
 	
 	@Override
 	public void setSelected() {
-		datoBusqueda.requestFocus();
+		busquedaTextField.requestFocus();
 	}
 
 	@Override
