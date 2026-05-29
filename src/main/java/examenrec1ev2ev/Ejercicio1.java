@@ -25,10 +25,13 @@ public class Ejercicio1 {
 	static float cifrar(String s) {
 		float resultado = 0;
 		int l = s.length();
+		s = s.toUpperCase();
 		for (int i = 0; i < l; i++) {
-			char c = s.toUpperCase().charAt(i);
+			char c = s.charAt(i);
 			if (Character.isLetter(c)) {
-				if (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
+				if ("AEIOUÁÉÍÓÚüÜ".indexOf(c) >= 0) {
+//				if (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U' || c == 'Á' || c == 'É'
+//					 || c == 'Í' || c == 'Ó' || c == 'Ú' || c == 'ü' || c == 'Ü') {
 					resultado += (c * l);
 				}
 				else {

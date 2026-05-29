@@ -105,12 +105,15 @@ public class Automovil implements Comparable<Automovil> {
 	
 	
 	public static void main(String[] args) throws Exception {
-		Set<Automovil> automoviles = new TreeSet<>(Set.of(
-			new Automovil("Seat", "Ibiza", "0003ABC", 2015, 120),
-			new Automovil("Seat", "Ibiza", "0000ABC", 2015, 120),
-			new Automovil("Opel", "Corsa", "0001ABC", 2020, 100)
-		));
-		automoviles.forEach(IO::println);
+		TreeSet<Automovil> automoviles = new TreeSet<>();
+		String respuesta = IO.readln("¿Quieres introducir los datos de un automóvil? (s/n)");
+		while(!respuesta.equalsIgnoreCase("n")) {
+			String marca = IO.readln("Marca: ");
+			
+			automoviles.add(new Automovil(marca, ...));
+			respuesta = IO.readln("¿Quieres introducir los datos de otro automóvil? (s/n)");
+		}
+		IO.println(automoviles);
 	}
 	
 	
