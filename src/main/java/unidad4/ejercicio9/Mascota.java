@@ -76,6 +76,8 @@ public class Mascota {
 		energia -= 3;
 		if (enferma)
 			energia--;
+		else if (energia < 5)
+			enferma = true;
 		return estadoDeAnimo();
 	}
 	
