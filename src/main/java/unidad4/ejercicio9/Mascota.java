@@ -1,8 +1,9 @@
 package unidad4.ejercicio9;
 
+import java.util.Objects;
 import java.util.Random;
 
-public class Mascota {
+public class Mascota implements Comparable<Mascota> {
 	
 	private static Random r = new Random();
 	
@@ -93,5 +94,35 @@ public class Mascota {
 		else
 			return "no me encuentro bien";
 	}
+
+	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(energia, nombre);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mascota other = (Mascota) obj;
+		return energia == other.energia && Objects.equals(nombre, other.nombre);
+	}
+
+	@Override
+	public int compareTo(Mascota o) {
+		int resultado = nombre.compareTo(o.nombre);
+		if (resultado == 0)
+			resultado =  energia - o.energia;
+		return resultado;
+	}
+
+	
+	
 
 }
