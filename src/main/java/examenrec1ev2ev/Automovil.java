@@ -110,7 +110,7 @@ public class Automovil implements Comparable<Automovil> {
 		while(!respuesta.equalsIgnoreCase("n")) {
 			String marca = IO.readln("Marca: ");
 			
-			automoviles.add(new Automovil(marca, ...));
+//			automoviles.add(new Automovil(marca, ...));
 			respuesta = IO.readln("¿Quieres introducir los datos de otro automóvil? (s/n)");
 		}
 		IO.println(automoviles);
