@@ -71,7 +71,7 @@ public class Mascota implements Comparable<Mascota> {
 		return estadoDeAnimo();
 	}
 	
-	public String actividaFisica() {
+	public String actividadFisica() {
 		if (!viva)
 			throw new RuntimeException("no se puede interactuar con una mascota muerta");
 		energia -= 3;

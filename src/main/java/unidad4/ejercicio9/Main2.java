@@ -2,8 +2,9 @@ package unidad4.ejercicio9;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Function;
 
-public class Main {
+public class Main2 {
 
 	private static List<Mascota> mascotas = new LinkedList<>();
 	
@@ -19,13 +20,13 @@ public class Main {
 					crear(v[1]);
 					break;
 				case "comer":
-					comer(v[1]);
+					ejecutar(Mascota::comer, v[1]);
 					break;
 				case "entrenar":
-					entrenar(v[1]);
+					ejecutar(Mascota::actividadFisica, v[1]);
 					break;
 				case "dormir":
-					dormir(v[1]);
+					ejecutar(Mascota::dormir, v[1]);
 					break;
 				case "curar":
 					
@@ -57,27 +58,12 @@ public class Main {
 			mascotas.add(new Mascota(nombre));
 	}
 	
-	private static void comer(String nombre) {
+	private static void ejecutar(Function<Mascota, String> f, String nombre) {
 		Mascota m = buscar(nombre);
 		if (m == null)
 			IO.println("no existe una mascota con ese nombre");
 		else
-			IO.println(m.comer());
+			IO.println(f.apply(m));
 	}
 	
-	private static void entrenar(String nombre) {
-		Mascota m = buscar(nombre);
-		if (m == null)
-			IO.println("no existe una mascota con ese nombre");
-		else
-			IO.println(m.actividadFisica());
-	}
-	
-	private static void dormir(String nombre) {
-		Mascota m = buscar(nombre);
-		if (m == null)
-			IO.println("no existe una mascota con ese nombre");
-		else
-			IO.println(m.dormir());
-	}
 }
