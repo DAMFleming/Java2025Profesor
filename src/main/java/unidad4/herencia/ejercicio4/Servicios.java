@@ -2,7 +2,7 @@ package unidad4.herencia.ejercicio4;
 
 import java.util.Objects;
 
-public class Servicios extends Empresa {
+public class Servicios extends Empresa implements Remunerable {
 
 	private String tipo;
 	private String numeroCuenta;
@@ -52,5 +52,9 @@ public class Servicios extends Empresa {
 		return "Servicios [tipo=" + tipo + ", numeroCuenta=" + numeroCuenta + "]";
 	}
 	
+	@Override
+	public void pagar(float importe, String numeroCuenta) {
+		System.out.println("Pago realizado a " + getNombre() + "en concepto de salario por importe de " + importe);
+	}
 
 }

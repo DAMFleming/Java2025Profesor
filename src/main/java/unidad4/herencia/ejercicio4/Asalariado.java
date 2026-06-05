@@ -8,11 +8,11 @@ public class Asalariado extends Empleado {
 		super(nombre, apellidos, fechaContratacion, numeroCuenta);
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Asalariado []";
+		return "Asalariado [" + super.toString() + "]";
 	}
 
-	
 	
 }

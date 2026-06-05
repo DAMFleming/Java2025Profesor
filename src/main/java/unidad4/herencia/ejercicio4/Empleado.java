@@ -3,7 +3,7 @@ package unidad4.herencia.ejercicio4;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public abstract class Empleado implements RealizarPagos {
+public abstract class Empleado implements Remunerable {
 
 	private String nombre;
 	private String apellidos;
