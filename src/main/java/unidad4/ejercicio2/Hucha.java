@@ -90,6 +90,49 @@ public class Hucha {
 	
 	public Integer getCantidadDeMonedas(int tipo) {
 		return  monedas.get(tipo) == null ? null : monedas.get(tipo).cantidad;
+//		if (monedas.get(tipo) == null)
+//			return null;
+//		else
+//			return monedas.get(tipo).cantidad;
+	}
+	
+	public Integer retirar(int tipo, int cantidad) {
+		Item i = monedas.get(tipo);
+		if (i == null)
+			return null;
+		if (i.cantidad >= cantidad) {
+			i.cantidad -= cantidad;
+			return cantidad;
+		} else {
+			int c = i.cantidad;
+			i.cantidad = 0;
+			return c;
+		}
+	}
+	
+	public int retirar(int total) {
+		int totalRetirado = 0;
+//		Set<Integer> s = monedas.keySet();
+//		List<Integer> l = new ArrayList<Integer>(s);
+		List<Integer> l = monedas.keySet().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+		for (Integer tipo: l) {
+			int cantidad = total / tipo;
+			Item i = monedas.get(tipo);
+			if (cantidad >= i.cantidad) {
+				i.cantidad -= cantidad;
+				int euros = cantidad * tipo;
+				totalRetirado += euros;
+				total -= euros;
+			}
+			else {
+				int euros = i.cantidad * tipo;
+				totalRetirado += euros;
+				total -= euros;
+				i.cantidad = 0;
+			}
+			
+				
+		}
 	}
 	
 	public static void main(String[] args) {
