@@ -2,9 +2,12 @@ package unidad4.ejercicio2;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Hucha {
 
@@ -44,15 +47,56 @@ public class Hucha {
 	public Hucha(String password, int valor) {
 		this.password = password;
 
-		Set<Integer> s = monedas.keySet();
-		List<Integer> l = new ArrayList<Integer>(s);
-		Collections.sort(l, Collections.reverseOrder());
+//		Set<Integer> s = monedas.keySet();
+//		List<Integer> l = new ArrayList<Integer>(s);
+		List<Integer> l = monedas.keySet().stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 		for (Integer key : l) {
 			monedas.get(key).cantidad = valor / key;
 			valor %= key;
 		}
 	}
 	
+	public boolean abrir(String password) {
+		return abierta = this.password.equals(password);
+	}
 	
+	public boolean cerrar(String password) {
+		if (abierta && this.password.equals(password)) {
+			abierta = false;
+			return true;
+		}
+		return false;
+	}
+	
+	public int getTotal() {
+		int total = 0;
+		for (Entry<Integer, Item> entry: monedas.entrySet())
+			total += entry.getKey() * entry.getValue().cantidad;
+		return total;
+	}
+	
+	public List<Integer> getCantidadDeMonedas() {
+		return monedas.entrySet().stream()
+				.sorted(Comparator.comparingInt(Entry::getKey))
+				.map(entry -> entry.getValue().cantidad)
+				.toList();
+	}
+	
+//	public int getCantidadDeMonedas(int tipo) {
+//		if (tipo != 1 && tipo != 2 && tipo != 5 && tipo != 10 && tipo != 20 && tipo != 50)
+//			throw new IllegalArgumentException("no existen monedas de " + tipo + " euros");
+//		return monedas.get(tipo).cantidad;
+//	}
+	
+	public Integer getCantidadDeMonedas(int tipo) {
+		return  monedas.get(tipo) == null ? null : monedas.get(tipo).cantidad;
+	}
+	
+	public static void main(String[] args) {
+		Hucha hucha = new Hucha("", 377);
+		System.out.println(hucha.getTotal());
+		System.out.println(hucha.getCantidadDeMonedas(50));
+		System.out.println(hucha.getCantidadDeMonedas());
+	}
 
 }
