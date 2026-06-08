@@ -130,8 +130,7 @@ public class Hucha {
 				total -= euros;
 				i.cantidad = 0;
 			}
-			
-				
+			return totalRetirado;	
 		}
 	}
 	
