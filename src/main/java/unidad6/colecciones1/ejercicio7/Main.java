@@ -5,10 +5,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		ListaContactos lista = new ListaContactos();
-		String linea;
-		while (!(linea = IO.readln("> ")).equalsIgnoreCase("fin")) {
-			String resultado = InterpreteComandos.ejecutarComando(linea, lista);
+		String resultado;
+		while ((resultado = InterpreteComandos.ejecutarComando(IO.readln("> "), lista)) != null);
 			System.out.println(resultado);
-		}
 	}
 }
