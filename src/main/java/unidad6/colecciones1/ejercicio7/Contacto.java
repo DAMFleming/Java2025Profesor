@@ -53,6 +53,12 @@ public class Contacto implements Comparable<Contacto> {
 	public int compareTo(Contacto o) {
 		return nombre.compareTo(o.nombre);
 	}
+
+	@Override
+	public String toString() {
+		return nombre + "[" + telefonos + "]";
+	}
+	
 	
 	
 }
