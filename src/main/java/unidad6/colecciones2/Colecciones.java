@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class Colecciones {
@@ -77,6 +78,16 @@ public class Colecciones {
 		return e == null ? null : e.getKey();
 	}
 	
+	public static Map<String, Integer> interseccion(Map<String, Integer> m1, Map<String, Integer> m2) {
+		Set<Entry<String, Integer>> c1 = m1.entrySet();
+		Set<Entry<String, Integer>> c2 = m2.entrySet();
+		TreeMap<String, Integer> m3 = new TreeMap<>();
+		c1.retainAll(c2);
+		for (Entry<String, Integer> e: c1) {
+			m3.put(e.getKey(), e.getValue());
+		}
+		return m3;
+	}
 
 	public static void main(String[] args) {
 		Set<String> c1 = new HashSet<>(Set.of("a", "aa", "aaa", "aaaa", "aaaaa"));
