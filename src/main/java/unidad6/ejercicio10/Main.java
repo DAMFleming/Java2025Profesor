@@ -1,7 +1,7 @@
 package unidad6.ejercicio10;
 
 import java.time.LocalTime;
-import java.time.temporal.TemporalAmount;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,19 +19,21 @@ public class Main {
 			robots.add(robot);
 		}
 		s = IO.readln();
-		LocalTime time = LocalTime.parse(s);
-		while (!(s = IO.readln()).equalsIgnoreCase("fin")) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("H:mm:ss");
+		LocalTime time = LocalTime.parse(s, dtf);
+		while (!(s = IO.readln().trim()).equalsIgnoreCase("fin")) {
 			linea.offer(s);
 		}
 		while (!linea.isEmpty()) {
-			time.plusSeconds(1);
+			time = time.plusSeconds(1);
 			boolean retirado = false;
 			for (Robot r: robots) {
 				if (r.estaOcupado())
 					r.procesarDuranteUnSegundo();
 				else if (!retirado) {
 						r.recogerProducto(linea.poll());
-						IO.println(r.getNombre() + " - " + r.getProducto() + "[" + time.toString() + "]");
+						IO.println(r.getNombre() + " - " + r.getProducto() + " [" + time.format(dtf) + "]");
+						retirado = true;
 				}
 			}
 			if (!retirado)
@@ -43,10 +45,10 @@ public class Main {
 
 /*
 ROB-15;SS2-10;NX8000-3
-08:00:00
+8:00:00
 disco duro
 procesador
 memoria RAM
 placa base
-fin 
+fin
 */
