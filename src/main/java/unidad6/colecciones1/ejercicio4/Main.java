@@ -1,4 +1,4 @@
-package unidad6.colecciones1.Ejercicio4;
+package unidad6.colecciones1.ejercicio4;
 
 public class Main {
 
