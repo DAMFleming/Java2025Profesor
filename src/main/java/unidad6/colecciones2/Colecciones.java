@@ -88,30 +88,78 @@ public class Colecciones {
 		}
 		return m3;
 	}
+	
+//	public static Integer valorMenosRepetido(Map<String, Integer> m) {
+//		Map<Integer, Integer> aux = new TreeMap<>();
+//		for (int edad: m.values()) {
+//			if (!aux.containsKey(edad))
+//				aux.put(edad, 1);
+//			else {
+//				int n = aux.get(edad);
+//				aux.put(edad, n + 1);
+//			}
+//		}
+//		Entry<Integer, Integer> min;
+//		Iterator<Entry<Integer, Integer>> i = aux.entrySet().iterator();
+//		if (i.hasNext()) {
+//			min = i.next();
+//			while (i.hasNext()) {
+//				Entry<Integer, Integer> e = i.next();
+//				if (min.getValue() > e.getValue() || (min.getValue() == e.getValue() && min.getKey() > e.getKey()))
+//					min = e;
+//			}
+//			return min.getKey();
+//		}
+//		return null;
+//	}
+	
+	public static Integer valorMenosRepetido(Map<String, Integer> m) {
+		Map<Integer, Integer> aux = new TreeMap<>();
+		for (int edad: m.values()) {
+			if (!aux.containsKey(edad))
+				aux.put(edad, 1);
+			else {
+				int n = aux.get(edad);
+				aux.put(edad, n + 1);
+			}
+		}
+		int min = Integer.MAX_VALUE;
+		for (int rep: aux.values())
+			if (min > rep)
+				min = rep;
+		for (Entry<Integer, Integer> e: aux.entrySet())
+			if (e.getValue() == min)
+				return e.getKey();
+		return null;
+	}
 
 	public static void main(String[] args) {
-		Set<String> c1 = new HashSet<>(Set.of("a", "aa", "aaa", "aaaa", "aaaaa"));
-		IO.println(c1);
-		eliminarLasDeLongitudPar(c1);
-		IO.println(c1);
+//		Set<String> c1 = new HashSet<>(Set.of("a", "aa", "aaa", "aaaa", "aaaaa"));
+//		IO.println(c1);
+//		eliminarLasDeLongitudPar(c1);
+//		IO.println(c1);
+//		
+//		// ----------------------------------------------------------------------------------
+//		
+//		Set<Integer> c2 = Set.of(20, 32, 25, 11, 48, 2, 1);
+//		System.out.println(contieneImpares(c2));
+//		c2 = Set.of(2, 4, 6, 8);
+//		System.out.println(contieneImpares(c2));
+//		
+//		// ----------------------------------------------------------------------------------
+//		
+//		Map<String, String> m1 = Map.of("c1", "aa", "c2", "bb", "c3", "cc");
+//		System.out.println(valoresUnicos(m1));
+//		m1 = Map.of("c1", "aa", "c2", "bb", "c3", "aa");
+//		System.out.println(valoresUnicos(m1));
+//		
+//		// ----------------------------------------------------------------------------------
+//		
+//		List<Integer> l1 = new ArrayList<>(List.of(2, 7, 1, 7, 3, 9, 1, 5, 4, 1, 3, 2, 1, 7, 3, 7, 9, 7)); 
+//		System.out.println(moda(l1));
 		
-		// ----------------------------------------------------------------------------------
-		
-		Set<Integer> c2 = Set.of(20, 32, 25, 11, 48, 2, 1);
-		System.out.println(contieneImpares(c2));
-		c2 = Set.of(2, 4, 6, 8);
-		System.out.println(contieneImpares(c2));
-		
-		// ----------------------------------------------------------------------------------
-		
-		Map<String, String> m1 = Map.of("c1", "aa", "c2", "bb", "c3", "cc");
-		System.out.println(valoresUnicos(m1));
-		m1 = Map.of("c1", "aa", "c2", "bb", "c3", "aa");
-		System.out.println(valoresUnicos(m1));
-		
-		// ----------------------------------------------------------------------------------
-		
-		List<Integer> l1 = new ArrayList<>(List.of(2, 7, 1, 7, 3, 9, 1, 5, 4, 1, 3, 2, 1, 7, 3, 7, 9, 7)); 
-		System.out.println(moda(l1));
+		Map<String, Integer> m = Map.of("Juan", 33, "Hugo", 29, "Ana", 45, "Luis", 47, "Mario", 33,
+				"Rosa", 29, "Carmen", 33, "Elena", 59, "Benito", 33);
+		IO.println(valorMenosRepetido(m));
 	}
 }
