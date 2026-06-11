@@ -1,11 +1,9 @@
 package unidad6.colecciones2;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Colecciones {
@@ -113,24 +112,40 @@ public class Colecciones {
 //		return null;
 //	}
 	
+//	public static Integer valorMenosRepetido(Map<String, Integer> m) {
+//		Map<Integer, Integer> aux = new TreeMap<>();
+//		for (int edad: m.values()) {
+//			if (!aux.containsKey(edad))
+//				aux.put(edad, 1);
+//			else {
+//				int n = aux.get(edad);
+//				aux.put(edad, n + 1);
+//			}
+//		}
+//		int min = Integer.MAX_VALUE;
+//		for (int rep: aux.values())
+//			if (min > rep)
+//				min = rep;
+//		for (Entry<Integer, Integer> e: aux.entrySet())
+//			if (e.getValue() == min)
+//				return e.getKey();
+//		return null;
+//	}
+	
 	public static Integer valorMenosRepetido(Map<String, Integer> m) {
+		if (m.isEmpty())
+			return null;
 		Map<Integer, Integer> aux = new TreeMap<>();
-		for (int edad: m.values()) {
-			if (!aux.containsKey(edad))
-				aux.put(edad, 1);
-			else {
-				int n = aux.get(edad);
-				aux.put(edad, n + 1);
-			}
-		}
-		int min = Integer.MAX_VALUE;
-		for (int rep: aux.values())
-			if (min > rep)
-				min = rep;
-		for (Entry<Integer, Integer> e: aux.entrySet())
-			if (e.getValue() == min)
-				return e.getKey();
-		return null;
+		m.values().forEach(edad -> {
+			aux.computeIfAbsent(edad, k -> 0);
+			aux.put(edad, aux.get(edad) + 1);
+		});
+		Set<Entry<Integer, Integer>> s = new TreeSet<>((e1, e2) -> {
+				int resultado = e1.getValue().compareTo(e2.getValue());
+				return resultado == 0 ? e1.getKey().compareTo(e2.getKey()) : resultado;
+		});
+		s.addAll(aux.entrySet());
+		return s.stream().findFirst().get().getKey();
 	}
 
 	public static void main(String[] args) {
