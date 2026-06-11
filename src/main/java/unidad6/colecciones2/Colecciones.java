@@ -137,8 +137,8 @@ public class Colecciones {
 			return null;
 		Map<Integer, Integer> aux = new TreeMap<>();
 		m.values().forEach(edad -> {
-			aux.computeIfAbsent(edad, k -> 0);
-			aux.put(edad, aux.get(edad) + 1);
+			if (aux.computeIfPresent(edad, (k, v) -> ++v) == null)
+				aux.put(edad, 1);
 		});
 		Set<Entry<Integer, Integer>> s = new TreeSet<>((e1, e2) -> {
 				int resultado = e1.getValue().compareTo(e2.getValue());
