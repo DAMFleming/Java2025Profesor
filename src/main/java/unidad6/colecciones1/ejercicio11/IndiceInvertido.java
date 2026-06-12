@@ -91,7 +91,7 @@ public class IndiceInvertido {
 	}
 	
 	public Set<String> getDocumentosContienenTodas(String palabras) {
-		
+		return getDocumentosContienenTodas(palabras.split("\\P{L}+"));
 	}
 	
 	public Set<String> getDocumentosContienenCualquiera(String ...palabras) {
@@ -105,7 +105,7 @@ public class IndiceInvertido {
 	}
 	
 	public Set<String> getDocumentosContienenCualquiera(String palabras) {
-
+		return getDocumentosContienenCualquiera(palabras.split("\\P{L}+"));
 	}
 	
 	

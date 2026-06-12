@@ -10,7 +10,9 @@ public class Main {
 		ii.indexar("Ingeniería y Arquitectura");
 		ii.indexar("Artes y Arquitectura");
 		IO.println(ii.getDocumentosContienenTodas("Artes", "y"));
+		IO.println(ii.getDocumentosContienenTodas("Artes, y"));
 		IO.println(ii.getDocumentosContienenCualquiera("Ciencias", "Arquitectura"));
+		
 	}
 	
 }
