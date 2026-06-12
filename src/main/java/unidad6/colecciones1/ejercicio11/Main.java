@@ -4,11 +4,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		IndiceInvertido ii = new IndiceInvertido();
-		ii.indexar("hola Mundo");
-		ii.indexar("adios Mundo cruel");
-		ii.indexar("el adios es muy cruel");
-		ii.indexar("adios Pepe");
-		IO.println(ii.getDocumentosDeTodas("adios", "cruel"));
+		ii.indexar("Artes y Humanidades");
+		ii.indexar("Ciencias de la Salud");
+		ii.indexar("Ciencias Sociales y Jurídicas");
+		ii.indexar("Ingeniería y Arquitectura");
+		ii.indexar("Artes y Arquitectura");
+		IO.println(ii.getDocumentosContienenTodas("Artes", "y"));
+		IO.println(ii.getDocumentosContienenCualquiera("Ciencias", "Arquitectura"));
 	}
 	
 }

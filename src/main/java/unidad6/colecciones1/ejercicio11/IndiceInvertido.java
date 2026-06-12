@@ -75,19 +75,39 @@ public class IndiceInvertido {
 		return Collections.unmodifiableSet(indice.get(palabra));
 	}
 	
-	public Set<String> getDocumentosDeTodas(String ...palabras) {
+	public Set<String> getDocumentosContienenTodas(String ...palabras) {
 		Set<String> s = new HashSet<>();
-		Set<String> aux = indice.get(palabras[0]);
+		Set<String> aux = indice.get(palabras[0].toLowerCase());
 		if (aux == null)
 			return null;
 		s.addAll(aux);
 		for (int i=1; i<palabras.length; i++) {
-			aux = indice.get(palabras[i]);
+			aux = indice.get(palabras[i].toLowerCase());
 			if (aux == null)
 				return null;
 			s.retainAll(aux);
 		}
 		return s;	
 	}
+	
+	public Set<String> getDocumentosContienenTodas(String palabras) {
+		
+	}
+	
+	public Set<String> getDocumentosContienenCualquiera(String ...palabras) {
+		Set<String> s = new HashSet<>();
+		for (String palabra: palabras) {
+			Set<String> aux = indice.get(palabra.toLowerCase());
+			if (aux != null)
+				s.addAll(aux);
+		}
+		return s;
+	}
+	
+	public Set<String> getDocumentosContienenCualquiera(String palabras) {
+
+	}
+	
+	
 	
 }
